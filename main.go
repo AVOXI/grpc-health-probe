@@ -214,7 +214,12 @@ func main() {
 		return
 	}
 	connDuration := time.Since(connStart)
-	defer conn.Close()
+
+	defer func(){
+		time.Sleep(time.Second)
+		conn.Close()
+	}()
+
 	if flVerbose {
 		log.Printf("connection establisted (took %v)", connDuration)
 	}
